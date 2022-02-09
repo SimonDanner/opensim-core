@@ -563,7 +563,7 @@ if(${BUILD_PYTHON_WRAPPING})
     # This must be done before adding the OpenSim libraries, since
     # OPENSIM_INSTALL_PYTHONDIR is used in OpenSimAddLibrary (in
     # OpenSimMacros.cmake).
-    set(PYTHON_INCLUDE_DIR ${Python3_INCLUDE_DIRS})
+    set(PYTHON_INCLUDE_DIR "${Python3_INCLUDE_DIRS}")
     set(PYTHON_LIBRARIES "${Python3_LIBRARIES}")
     if(APPLE AND ${OPENSIM_PYTHON_VERSION} STREQUAL "2")
         # If you have Homebrew's Python2, then by default, PythonInterp finds
