@@ -552,9 +552,8 @@ if(${BUILD_PYTHON_WRAPPING})
     else()
         message(FATAL_ERROR "OPENSIM_PYTHON_VERSION should be '2' or '3'.")
     endif()
-    find_package(PythonInterp ${required_python_version} REQUIRED)
+    find_package(Python3 COMPONENTS Interpreter Development)
     find_package(NumPy REQUIRED)
-
     # We update the python install dir to include the python version,
     # now that we know it. We replace the token "VERSION" with the actual python
     # version.
@@ -564,7 +563,8 @@ if(${BUILD_PYTHON_WRAPPING})
     # This must be done before adding the OpenSim libraries, since
     # OPENSIM_INSTALL_PYTHONDIR is used in OpenSimAddLibrary (in
     # OpenSimMacros.cmake).
-
+    set(PYTHON_INCLUDE_DIR ${Python3_INCLUDE_DIRS})
+    set(PYTHON_LIBRARIES "${Python3_LIBRARIES}")
     if(APPLE AND ${OPENSIM_PYTHON_VERSION} STREQUAL "2")
         # If you have Homebrew's Python2, then by default, PythonInterp finds
         # Apple's Python, but PythonLibs finds Homebrew's Python, causing
@@ -589,7 +589,7 @@ if(${BUILD_PYTHON_WRAPPING})
             "${python_prefix}/lib/libpython${python_version_majmin}.dylib"
             CACHE FILEPATH "${pylib_desc}")
     endif()
-    find_package(PythonLibs ${required_python_version} REQUIRED)
+    #find_package(PythonLibs ${required_python_version} REQUIRED)
     
     # Most users need to copy dependencies if wrapping is on. Warn user
     # if it isn't on.
